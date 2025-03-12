@@ -21,12 +21,12 @@ function addCharacter({name, age}) {
 console.log(addCharacter({name: "Evilla", age: 30}));
 
 function getCharacter(name) {
-  return characters.filter(el => el.name === name).pop();
+  return characters.find(el => el.name === name);
 }
 console.log(getCharacter('Evilla'));
 
 function getCharactersByAge(minAge) {
-  if (!minAge || typeof minAge !== 'number' || +minAge < 0 || isNaN(minAge)) throw new Error('Invalid minAge data');
+  if (typeof minAge !== 'number' || +minAge < 0) throw new Error('Invalid minAge data');
   else {
     const result = characters.filter(el => el.age >= +minAge);
     return result;
