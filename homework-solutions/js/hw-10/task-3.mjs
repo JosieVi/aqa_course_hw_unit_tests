@@ -33,11 +33,5 @@ function uniqueRandomGenerator(n) {
 }
 const randomValue = uniqueRandomGenerator(5);
 console.log(randomValue(5));
-console.log(randomValue(5));
-console.log(randomValue(5));
-console.log(randomValue(5));
-console.log(randomValue(5));
-console.log(randomValue(5));
-console.log(randomValue(5));
 
 export { uniqueRandomGenerator };
