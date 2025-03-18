@@ -7,20 +7,31 @@
   Задачу решить через замыкания
   Например n = 5, функция выведет 5 чисел 1-5, а после будет выводить сугубо 'All numbers were received'
 
-  Рекоммендации:
+  Рекомендации:
    - Для генерации числа в границах воспользуйтесь методом:
       function getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
       }
-
 */
 
 function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 function uniqueRandomGenerator(n) {
-  // Ваш код
+  if (n === 0) return () => 'All numbers were received';
+  let previousValues = [];
+  return () => {    
+    if (previousValues.length === n) return 'All numbers were received';
+    let otherValue = getRandomArbitrary(1, n + 1); 
+    while (previousValues.includes(otherValue)) {
+      otherValue = getRandomArbitrary(1, n + 1); 
+    }
+    previousValues.push(otherValue);
+    return(otherValue);            
+  }
 }
+const randomValue = uniqueRandomGenerator(5);
+console.log(randomValue(5));
 
 export { uniqueRandomGenerator };
