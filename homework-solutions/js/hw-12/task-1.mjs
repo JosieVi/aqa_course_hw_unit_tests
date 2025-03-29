@@ -39,12 +39,8 @@ Promise.allSettled([promiseNumber(1), promiseNumber(2), promiseNumber(3)]).then(
 // 7
 async function newFunction1() {
     try {
-        const result1 = await promiseNumber(1);
-        console.log((`Task 7, the result of newFunction1 is ${result1}`));
-        const result2 = await promiseNumber(2);
-        console.log((`Task 7, the result of newFunction1 is ${result2}`));
-        const result3 = await promiseNumber(3);
-        console.log((`Task 7, the result of newFunction1 is ${result3}`));
+        const [result1, result2, result3] = await Promise.all([promiseNumber(1), promiseNumber(2), promiseNumber(3)]);
+        console.log((`Task 7, the result of newFunction1 is ${result1}\nTask 7, the result of newFunction1 is ${result2}\nTask 7, the result of newFunction1 is ${result3}`));
     }
     catch (error) {
         console.error(`Error: ${error}`);
@@ -53,18 +49,8 @@ async function newFunction1() {
 newFunction1();
 async function newFunction2() {
     try {
-        const result1 = await promiseNumber(1);
-        if (result1) {
-            console.log((`Task 7, the result of newFunction2 is: Value = ${result1}, status = success`));
-        }
-        const result2 = await promiseNumber(2);
-        if (result2) {
-            console.log((`Task 7, the result of newFunction2 is: Value = ${result2}, status = success`));
-        }
-        const result3 = await promiseNumber(3);
-        if (result3) {
-            console.log((`Task 7, the result of newFunction2 is: Value = ${result3}, status = success`));
-        }
+        let result = await Promise.allSettled([promiseNumber(1), promiseNumber(2), promiseNumber(3)]); promiseNumber(1);
+        result.forEach((el) => console.log(`Task 7, the result of newFunction2 is ${JSON.stringify(el)}`));
     }
     catch (error) {
         console.error(`Error: ${error}`);
