@@ -13,16 +13,73 @@
     function wrapInArray<T> {
       // ваш код здесь
     }
-
     const numberArray = wrapInArray(5); // [5]
     const stringArray = wrapInArray('Hello'); // ['Hello']
 
 11. Создайте дженерик функцию getLastElement, которая принимает массив элементов типа T, и возвращает последний элемент (типа T).
-
     function getLastItem<T> {
       // ваш код здесь
     }
-
     console.log(getLastItem([1, 2, 3, 4])); // 4
     console.log(getLastItem(['a', 'b', 'c'])); // 'c'
 */
+
+// 1
+interface IEmployee {
+  name: string;
+  salary: number;
+  isManager: boolean;
+}
+const QA: IEmployee = {
+  name: "Evilla",
+  salary: 50000,
+  isManager: true,
+}
+
+// 2
+type EmployeeKeys = keyof IEmployee;
+
+// 3
+type QaKeys = keyof typeof QA;
+
+// 4
+type UserType = typeof QA;
+
+// 5
+type PartialEmployee = Partial<IEmployee>;
+
+// 6
+type NameAndSalaryFromEmployee = Pick<IEmployee, 'name' | 'salary'>;
+
+// 7
+type AllFieldsFromEmployeeExceptIsManager = Omit<IEmployee, 'isManager'>;
+
+// 8
+type ReadOnlyIemployee = Readonly<IEmployee>;
+
+// 9
+const qaRecord: Record<string, QaKeys> = {
+  firstKey: 'name',
+  secondKey: 'salary',
+  thirdKey: 'isManager',
+};
+
+// 10     
+function wrapInArray<T>(arg: T): T[] {
+  return [arg];
+}
+const numberArray = wrapInArray(5);
+console.log(numberArray); // [5]
+const stringArray = wrapInArray('Hello');
+console.log(stringArray); // ['Hello']
+
+// 11
+function getLastItem<T>(arg: T[]): T {
+  if (arg.length === 0) {
+    throw new Error('Array is empty');
+  }
+  return arg[arg.length - 1];
+}
+
+console.log(getLastItem([1, 2, 3, 4])); // 4
+console.log(getLastItem(['a', 'b', 'c'])); // 'c'
