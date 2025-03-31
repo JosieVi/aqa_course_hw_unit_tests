@@ -9,13 +9,15 @@
 
 */
 
-function customMap<T>(array: T[], callback: (element: T, index: number, array: T[]) => T): T[] {
-   let result: T[] = [];
+function customMap<T, U>(array: T[], callback: (element: T, index: number, array: T[]) => U): U[] {
+   let result: U[] = [];
    for (let i = 0; i < array.length; i++) {
       result.push(callback(array[i], i, array));
    }
    return result;
 }
 
-let exampleOfCustomMap = customMap([1, 2, 7, 4, 5], (element, index) => element * index);
-console.log(exampleOfCustomMap);
+let exampleOfCustomMap1 = customMap([1, 2, 7, 4, 5], (element, index) => element * index);
+let exampleOfCustomMap2 = customMap([1, 2, 7, 4, 5], (element, index) => `${element}`);
+console.log(exampleOfCustomMap1);
+console.log(exampleOfCustomMap2);
